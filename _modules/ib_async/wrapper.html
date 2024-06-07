@@ -527,18 +527,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_endReq</span><span class="p">(</span><span class="s2">&quot;positions&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">positionMulti</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">modelCode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">contract</span><span class="p">:</span> <span class="n">Contract</span><span class="p">,</span>
-        <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">avgCost</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">pass</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">modelCode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">contract</span><span class="p">:</span> <span class="n">Contract</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">avgCost</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reqId</span><span class="p">)</span> <span class="p">;</span> 
+        <span class="k">if</span> <span class="n">results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;account&#39;</span><span class="p">:</span><span class="n">account</span><span class="p">,</span><span class="s1">&#39;modelCode&#39;</span><span class="p">:</span><span class="n">modelCode</span> <span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span><span class="s1">&#39;secType&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">secType</span><span class="p">,</span><span class="s1">&#39;currency&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span><span class="s1">&#39;position&#39;</span><span class="p">:</span><span class="n">pos</span> <span class="p">,</span> <span class="s1">&#39;avgCost&#39;</span><span class="p">:</span><span class="n">avgCost</span> <span class="p">}</span> <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">positionMultiEnd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_endReq</span><span class="p">(</span><span class="n">reqId</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pnl</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dailyPnL</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">unrealizedPnL</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">realizedPnL</span><span class="p">:</span> <span class="nb">float</span>
@@ -1581,15 +1577,8 @@
                 <span class="n">ticker</span><span class="o">.</span><span class="n">updateEvent</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ib</span><span class="o">.</span><span class="n">pendingTickersEvent</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pendingTickers</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">positionMulti</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">modelCode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">contract</span><span class="p">:</span> <span class="n">Contract</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">avgCost</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reqId</span><span class="p">)</span> <span class="p">;</span> 
-        <span class="k">if</span> <span class="n">results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;account&#39;</span><span class="p">:</span><span class="n">account</span><span class="p">,</span><span class="s1">&#39;modelCode&#39;</span><span class="p">:</span><span class="n">modelCode</span> <span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span><span class="s1">&#39;secType&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">secType</span><span class="p">,</span><span class="s1">&#39;currency&#39;</span><span class="p">:</span><span class="n">contract</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span><span class="s1">&#39;position&#39;</span><span class="p">:</span><span class="n">pos</span> <span class="p">,</span> <span class="s1">&#39;avgCost&#39;</span><span class="p">:</span><span class="n">avgCost</span> <span class="p">}</span> <span class="p">)</span>
+    
         
-    <span class="k">def</span> <span class="nf">positionMultiEnd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reqId</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_endReq</span><span class="p">(</span><span class="n">reqId</span><span class="p">)</span>
 </pre></div>
 
            </div>
